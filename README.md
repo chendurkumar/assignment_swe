@@ -2,12 +2,13 @@
 # Date  02-12-2015
 
 # Database # 
-* - Azure Cloud MS SQL Server Database  
-* - Server :  betsson.database.windows.net
-* - Username: kumar
-* - Password: aV_d6!?}Lqtgj7Jc
-* - Table creation scripts are located in git repo location {workspace}\DB Scripts\Create Scripts 
-* - Table same data insertion scripts are located in git repo location {workspace}\DB Scripts\Data Insert Scripts 
+
+* Azure Cloud MS SQL Server Database  
+* Server :  betsson.database.windows.net
+* Username: kumar
+* Password: aV_d6!?}Lqtgj7Jc
+* Table creation scripts are located in git repo location {workspace}\DB Scripts\Create Scripts 
+* Table same data insertion scripts are located in git repo location {workspace}\DB Scripts\Data Insert Scripts 
 
 In the web.config file, you can find the above metnioned credentails, please free to use them.
 
