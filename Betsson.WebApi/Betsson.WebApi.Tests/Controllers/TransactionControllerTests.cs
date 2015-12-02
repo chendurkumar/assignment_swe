@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Http.Routing;
 using Betsson.WebApi.Controllers;
 using Betsson.WebApi.Entities;
@@ -15,6 +14,7 @@ namespace Betsson.WebApi.Tests.Controllers
     public class TransactionControllerTests
     {
         private const string Localhost = "localhost:60000";
+
         [TestMethod]
         public void PutTransactionTest()
         {
@@ -44,7 +44,7 @@ namespace Betsson.WebApi.Tests.Controllers
             {
                 {"controller", "Transaction"}
             });
-           
+
             var httpResponse = controller.PutTransaction(3, transaction);
             var trans = httpResponse.Content.ReadAsAsync<TransactionEntity>().Result;
             Assert.IsNotNull(trans, "Transaction was NULL");

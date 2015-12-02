@@ -1,14 +1,11 @@
-﻿using AutoMapper;
-using Betsson.WebApi.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
+﻿using System;
 using System.Data.Entity.Validation;
 using System.Globalization;
 using System.Linq;
 using System.Web.Http;
+using AutoMapper;
 using Betsson.Data;
+using Betsson.WebApi.Entities;
 using Betsson.WebApi.Utilities;
 using log4net;
 
@@ -20,7 +17,7 @@ namespace Betsson.WebApi.Models
         private readonly ServiceFactory _instance = ServiceFactory.Instance;
 
         /// <summary>
-        /// Create a Account
+        ///     Create a Account
         /// </summary>
         /// <param name="account">Account Object</param>
         public AccountEntity CreateAccount(NewAccountDetailEntity account)
@@ -31,7 +28,7 @@ namespace Betsson.WebApi.Models
                 Account_Balance = decimal.Parse(account.DepositAmount),
                 Customer_Id = CheckCustomer(account.CustomerId),
                 Account_Type = account.AccountType,
-                Account_Number = GetNextAccountNumber(),
+                Account_Number = GetNextAccountNumber()
             };
 
             try
@@ -51,7 +48,8 @@ namespace Betsson.WebApi.Models
             {
                 foreach (var eve in e.EntityValidationErrors)
                 {
-                    Log.Error($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:");
+                    Log.Error(
+                        $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:");
                     foreach (var ve in eve.ValidationErrors)
                     {
                         Log.Error($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
@@ -65,53 +63,12 @@ namespace Betsson.WebApi.Models
             }
             catch (Exception ex)
             {
-               throw WebExceptionFactory.GetServerError(ex.Message);
+                throw WebExceptionFactory.GetServerError(ex.Message);
             }
         }
 
         /// <summary>
-        /// Check if the customer exsist. 
-        /// </summary>
-        /// <param name="customerId"></param>
-        /// <returns>customer id</returns>
-        private int CheckCustomer(string customerId)
-        {
-            int custId;
-            try
-            {
-                custId = int.Parse(customerId);
-            }
-            catch (Exception ex)
-            {
-                throw WebExceptionFactory.GetBadRequestError($"Invalid Customer ID {customerId}", ex);
-            }
-            if (custId == 0)
-            {
-                throw WebExceptionFactory.GetBadRequestError("Customer ID cannot be zero");
-            }
-            var customer = _instance.DataContext.Customer.FirstOrDefault(x => x.Customer_Id.Equals(custId));
-            if (customer == null) // new customer
-            {
-                throw WebExceptionFactory.GetNotFoundError(
-                    $"Customer with id {customerId} dont exist, please create new customer");
-            }
-            return customer.Customer_Id;
-        }
-
-        /// <summary>
-        /// GetAccount next account number
-        /// </summary>
-        /// <returns></returns>
-        private string GetNextAccountNumber()
-        {
-            var randomNumber = new Random().Next(0, 1000000).ToString("D5");
-            var accountNumber = $"1234-{randomNumber}";
-            var accountAlreadyExist = _instance.DataContext.Account.Any(x => x.Account_Number.Equals(accountNumber));
-            return accountAlreadyExist ? GetNextAccountNumber() : accountNumber;
-        }
-
-        /// <summary>
-        /// GetAccount a account details
+        ///     GetAccount a account details
         /// </summary>
         /// <param name="accountId">Account ID</param>
         /// <returns></returns>
@@ -132,7 +89,8 @@ namespace Betsson.WebApi.Models
             {
                 foreach (var eve in e.EntityValidationErrors)
                 {
-                    Log.Error($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:");
+                    Log.Error(
+                        $"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors:");
                     foreach (var ve in eve.ValidationErrors)
                     {
                         Log.Error($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
@@ -146,13 +104,13 @@ namespace Betsson.WebApi.Models
             }
             catch (Exception ex)
             {
-               throw WebExceptionFactory.GetServerError(ex.Message);
+                throw WebExceptionFactory.GetServerError(ex.Message);
             }
             return null;
         }
 
         /// <summary>
-        /// Execute a transaction 
+        ///     Execute a transaction
         /// </summary>
         /// <param name="transaction">Transaction object</param>
         public TransactionEntity ExecuteTransaction(TransactionEntity transaction)
@@ -189,7 +147,7 @@ namespace Betsson.WebApi.Models
                     Details = transaction.Details,
                     Timestamp = DateTime.Now.ToString("yyyyMMddHHmmssffff")
                 };
-                var newTransaction =_instance.DataContext.Transaction.Add(trans);
+                var newTransaction = _instance.DataContext.Transaction.Add(trans);
                 Log.Info($"new transaction has been created with id {newTransaction.Transaction_Id}");
                 Commit();
                 Mapper.CreateMap<Transaction, TransactionEntity>();
@@ -224,7 +182,7 @@ namespace Betsson.WebApi.Models
         }
 
         /// <summary>
-        /// GetAccount the balance details
+        ///     GetAccount the balance details
         /// </summary>
         /// <param name="accountId">account id</param>
         /// <returns>balance</returns>
@@ -270,12 +228,52 @@ namespace Betsson.WebApi.Models
         }
 
         /// <summary>
-        /// Save the changed to the DB.
+        ///     Check if the customer exsist.
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>customer id</returns>
+        private int CheckCustomer(string customerId)
+        {
+            int custId;
+            try
+            {
+                custId = int.Parse(customerId);
+            }
+            catch (Exception ex)
+            {
+                throw WebExceptionFactory.GetBadRequestError($"Invalid Customer ID {customerId}", ex);
+            }
+            if (custId == 0)
+            {
+                throw WebExceptionFactory.GetBadRequestError("Customer ID cannot be zero");
+            }
+            var customer = _instance.DataContext.Customer.FirstOrDefault(x => x.Customer_Id.Equals(custId));
+            if (customer == null) // new customer
+            {
+                throw WebExceptionFactory.GetNotFoundError(
+                    $"Customer with id {customerId} dont exist, please create new customer");
+            }
+            return customer.Customer_Id;
+        }
+
+        /// <summary>
+        ///     GetAccount next account number
+        /// </summary>
+        /// <returns></returns>
+        private string GetNextAccountNumber()
+        {
+            var randomNumber = new Random().Next(0, 1000000).ToString("D5");
+            var accountNumber = $"1234-{randomNumber}";
+            var accountAlreadyExist = _instance.DataContext.Account.Any(x => x.Account_Number.Equals(accountNumber));
+            return accountAlreadyExist ? GetNextAccountNumber() : accountNumber;
+        }
+
+        /// <summary>
+        ///     Save the changed to the DB.
         /// </summary>
         private void Commit()
         {
             _instance.DataContext.SaveChanges();
         }
-
     }
 }

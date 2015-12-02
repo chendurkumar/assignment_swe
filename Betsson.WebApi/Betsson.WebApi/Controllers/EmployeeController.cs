@@ -23,11 +23,11 @@ namespace Betsson.WebApi.Controllers
 
         // POST api/employee
 
-            /// <summary>
-            /// Authenticate given user
-            /// </summary>
-            /// <param name="auth">username and password</param>
-            /// <returns></returns>
+        /// <summary>
+        ///     Authenticate given user
+        /// </summary>
+        /// <param name="auth">username and password</param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult PostLogin([FromBody] AuthenticationEntity auth)
         {

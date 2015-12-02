@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Http.Routing;
 using Betsson.WebApi.Controllers;
 using Betsson.WebApi.Entities;
@@ -59,7 +58,6 @@ namespace Betsson.WebApi.Tests.Controllers
             Assert.AreEqual(createdAccount.Customer_Id, 3, "Customer ID are not same");
             Assert.AreSame(createdAccount.Account_Number, "1234-12345", "Account number are not same");
             Assert.AreSame(createdAccount.Account_Type, "Fixed Deposit", "Account type are not same");
-
         }
 
         [TestMethod]

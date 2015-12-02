@@ -28,11 +28,11 @@ namespace Betsson.WebApi.Controllers
         //PUT api/transaction/ - PerformTransaction
 
         /// <summary>
-        /// Execute a transanction (deposit or withdrawal)
+        ///     Execute a transanction (deposit or withdrawal)
         /// </summary>
         /// <param name="id">account id</param>
         /// <param name="transaction">trasaction entity</param>
-        /// <returns></returns>
+        /// <returns>Transaction entity</returns>
         [HttpPut]
         public HttpResponseMessage PutTransaction(int id, [FromBody] TransactionEntity transaction)
         {
@@ -51,6 +51,12 @@ namespace Betsson.WebApi.Controllers
         }
 
         //GET api/transaction/ 
+
+        /// <summary>
+        ///     Get the account balance details
+        /// </summary>
+        /// <param name="accountId">account Id</param>
+        /// <returns>balance amount</returns>
         [HttpGet]
         public string GetBalance([FromUri] int accountId)
         {

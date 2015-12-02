@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Betsson.WebApi.Entities;
+﻿using Betsson.WebApi.Entities;
 
 namespace Betsson.WebApi.Models
 {
