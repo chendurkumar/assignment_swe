@@ -9,11 +9,7 @@ namespace Betsson.WebApi.Models
             DataContext = new BetssonEntities();
         }
 
-        public BetssonEntities DataContext
-        {
-            get;
-            private set;
-        }
+        public BetssonEntities DataContext { get; private set; }
 
         public static ServiceFactory Instance { get; } = new ServiceFactory();
     }

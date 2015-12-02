@@ -25,7 +25,14 @@ namespace Betsson.WebApi.Controllers
             Log.Debug("AccountService initialized for Test");
         }
 
+
         //POST api/account/ - Create Account
+
+        /// <summary>
+        /// Create a new account
+        /// </summary>
+        /// <param name="account">new account details</param>
+        /// <returns>Account entity</returns>
         [HttpPost]
         public HttpResponseMessage PostAccount(NewAccountDetailEntity account)
         {
@@ -41,6 +48,12 @@ namespace Betsson.WebApi.Controllers
         }
 
         //GET api/account/
+
+            /// <summary>
+            /// Get account information
+            /// </summary>
+            /// <param name="accountId">account Id</param>
+            /// <returns>Acctounf entity</returns>
         [HttpGet]
         public AccountEntity GetAccount([FromUri] int accountId)
         {

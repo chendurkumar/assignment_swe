@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Betsson.WebApi.Entities
 {
@@ -10,8 +6,10 @@ namespace Betsson.WebApi.Entities
     {
         [Required]
         public string AccountType { get; set; }
+
         [Required]
         public string DepositAmount { get; set; }
+
         [Required]
         public string CustomerId { get; set; }
     }

@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BetssonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BetssonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure"
+              Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Account_Id" />
@@ -92,22 +96,29 @@
             <End Role="Transaction" EntitySet="Transaction" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BetssonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BetssonModel" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Account_Id" />
           </Key>
           <Property Name="Account_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Account_Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Account_Number" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Account_Number" Type="String" MaxLength="20" FixedLength="true" Unicode="true"
+                    Nullable="false" />
           <Property Name="Account_Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Customer_Id" Type="Int32" Nullable="false" />
           <Property Name="Deleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Account_To_Customer" FromRole="Account" ToRole="Customer" />
-          <NavigationProperty Name="Transaction" Relationship="Self.FK_Transaction_To_Account" FromRole="Account" ToRole="Transaction" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Account_To_Customer" FromRole="Account"
+                              ToRole="Customer" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_Transaction_To_Account" FromRole="Account"
+                              ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -119,12 +130,14 @@
           <Property Name="SSN" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
           <Property Name="HouseNumber" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="StreetAddress1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StreetAddress1" Type="String" MaxLength="50" FixedLength="false" Unicode="true"
+                    Nullable="false" />
           <Property Name="StreetAddress2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Account_To_Customer" FromRole="Customer" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Account_To_Customer" FromRole="Customer"
+                              ToRole="Account" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -147,7 +160,8 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Timestamp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_To_Account" FromRole="Transaction" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_To_Account" FromRole="Transaction"
+                              ToRole="Account" />
         </EntityType>
         <Association Name="FK_Account_To_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
@@ -192,7 +206,8 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BetssonModelStoreContainer" CdmEntityContainer="BetssonEntities">
+        <EntityContainerMapping StorageEntityContainer="BetssonModelStoreContainer"
+                                CdmEntityContainer="BetssonEntities">
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="BetssonModel.Account">
               <MappingFragment StoreEntitySet="Account">

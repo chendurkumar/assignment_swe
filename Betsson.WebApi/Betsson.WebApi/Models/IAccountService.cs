@@ -7,7 +7,7 @@ namespace Betsson.WebApi.Models
     {
         AccountEntity CreateAccount(NewAccountDetailEntity account);
         AccountEntity GetAccount(int accountId);
-        void ExecuteTransaction(TransactionEntity transaction);
+        TransactionEntity ExecuteTransaction(TransactionEntity transaction);
         string GetBalance(int accountId);
     }
 }

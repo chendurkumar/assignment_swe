@@ -155,7 +155,7 @@ namespace Betsson.WebApi.Models
         /// Execute a transaction 
         /// </summary>
         /// <param name="transaction">Transaction object</param>
-        public void ExecuteTransaction(TransactionEntity transaction)
+        public TransactionEntity ExecuteTransaction(TransactionEntity transaction)
         {
             try
             {
@@ -189,10 +189,11 @@ namespace Betsson.WebApi.Models
                     Details = transaction.Details,
                     Timestamp = DateTime.Now.ToString("yyyyMMddHHmmssffff")
                 };
-                _instance.DataContext.Transaction.Add(trans);
-
-                // Finally
+                var newTransaction =_instance.DataContext.Transaction.Add(trans);
+                Log.Info($"new transaction has been created with id {newTransaction.Transaction_Id}");
                 Commit();
+                Mapper.CreateMap<Transaction, TransactionEntity>();
+                return Mapper.Map<TransactionEntity>(newTransaction);
             }
             catch (ArgumentNullException ex)
             {

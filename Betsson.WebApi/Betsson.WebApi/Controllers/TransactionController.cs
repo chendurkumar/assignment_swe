@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using Betsson.WebApi.Entities;
 using Betsson.WebApi.Models;
 using Betsson.WebApi.Utilities;
@@ -24,8 +26,15 @@ namespace Betsson.WebApi.Controllers
         }
 
         //PUT api/transaction/ - PerformTransaction
+
+        /// <summary>
+        /// Execute a transanction (deposit or withdrawal)
+        /// </summary>
+        /// <param name="id">account id</param>
+        /// <param name="transaction">trasaction entity</param>
+        /// <returns></returns>
         [HttpPut]
-        public IHttpActionResult PutTransaction(int id, [FromBody] TransactionEntity transaction)
+        public HttpResponseMessage PutTransaction(int id, [FromBody] TransactionEntity transaction)
         {
             if (!ModelState.IsValid)
             {
@@ -37,8 +46,8 @@ namespace Betsson.WebApi.Controllers
                 Log.Error("Sent Id is not same as account ID");
                 throw WebExceptionFactory.GetBadRequestError("Account ID is different");
             }
-            _accountService.ExecuteTransaction(transaction);
-            return Ok();
+            var newTransaction = _accountService.ExecuteTransaction(transaction);
+            return Request.CreateResponse(HttpStatusCode.Created, newTransaction);
         }
 
         //GET api/transaction/ 
