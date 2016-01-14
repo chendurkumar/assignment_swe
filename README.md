@@ -4,9 +4,9 @@
 # Database # 
 
 * Azure Cloud MS SQL Server Database  
-* Server :  betsson.database.windows.net
-* Username: kumar
-* Password: aV_d6!?}Lqtgj7Jc
+* Server :  please mail to get this password
+* Username: please mail to get this password
+* Password: please mail to get this password
 * Table creation scripts are located in git repo location {workspace}\DB Scripts\Create Scripts 
 * Table same data insertion scripts are located in git repo location {workspace}\DB Scripts\Data Insert Scripts 
 
